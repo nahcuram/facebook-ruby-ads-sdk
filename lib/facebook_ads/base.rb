@@ -6,7 +6,7 @@ module FacebookAds
         get("/#{id}", objectify: true)
       end
 
-      def get(path, query: {}, objectify:)
+      def get(path, query: {}, objectify: nil)
         query = pack(query, objectify: objectify) # Adds access token, fields, etc.
         uri = "#{FacebookAds.base_uri}#{path}?" + build_nested_query(query)
         FacebookAds.logger.debug "GET #{uri}"
@@ -82,13 +82,13 @@ module FacebookAds
         object
       end
 
-      def pack(hash, objectify:)
+      def pack(hash, objectify: nil)
         hash = hash.merge(access_token: FacebookAds.access_token)
         hash = hash.merge(fields: self::FIELDS.join(',')) if objectify
         hash.delete_if { |_k, v| v.nil? }
       end
 
-      def unpack(response, objectify:)
+      def unpack(response, objectify: nil)
         raise Exception, 'Invalid nil response' if response.nil?
         response = response.body if response.is_a?(RestClient::Response)
 

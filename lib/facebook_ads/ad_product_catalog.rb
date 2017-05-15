@@ -16,7 +16,7 @@ module FacebookAds
         end
       end
 
-      def create(name:)
+      def create(name: nil)
         query = { name: name }
         result = post("/#{FacebookAds.business_id}/product_catalogs", query: query)
         find(result['id'])
@@ -30,14 +30,14 @@ module FacebookAds
     end
 
     # catalog.create_ad_product_feed(name: 'Test', schedule: { url: 'https://tophatter.com/admin/ad_automation/ad_product_feeds/1.csv', interval: 'HOURLY' })
-    def create_ad_product_feed(name:, schedule:)
+    def create_ad_product_feed(name: nil, schedule: nil)
       query = { name: name, schedule: schedule }
       result = AdProductCatalog.post("/#{id}/product_feeds", query: query)
       AdProductFeed.find(result['id'])
     end
 
     # catalog.create_ad_product_set(name: 'Ring Set', filter: {"category":{"i_contains":"Apparel & Accessories > Jewelry > Earrings"}})
-    def create_ad_product_set(name:, filter:)
+    def create_ad_product_set(name: nil, filter: nil)
       query = { name: name, filter: filter.to_json }
       result = AdProductSet.post("/#{id}/product_sets", query: query)
       AdProductSet.find(result['id'])

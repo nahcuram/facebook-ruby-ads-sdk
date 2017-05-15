@@ -72,7 +72,7 @@ module FacebookAds
       Ad.paginate("/#{id}/ads", query: { effective_status: effective_status, limit: limit })
     end
 
-    def create_ad(name:, creative_id:)
+    def create_ad(name: nil, creative_id: nil)
       query = { name: name, adset_id: id, creative: { creative_id: creative_id }.to_json }
       result = Ad.post("/act_#{account_id}/ads", query: query)
       Ad.find(result['id'])

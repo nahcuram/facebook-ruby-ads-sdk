@@ -24,7 +24,7 @@ module FacebookAds
       AdCampaign.paginate("/#{id}/campaigns", query: { effective_status: effective_status, limit: limit })
     end
 
-    def create_ad_campaign(name:, objective:, status: 'ACTIVE')
+    def create_ad_campaign(name: nil, objective: nil, status: 'ACTIVE')
       raise Exception, "Objective must be one of: #{AdCampaign::OBJECTIVES.join(', ')}" unless AdCampaign::OBJECTIVES.include?(objective)
       raise Exception, "Status must be one of: #{AdCampaign::STATUSES.join(', ')}" unless AdCampaign::STATUSES.include?(status)
       query = { name: name, objective: objective, status: status }
@@ -32,7 +32,7 @@ module FacebookAds
       AdCampaign.find(result['id'])
     end
 
-    def create_dynamic_ad_campaign(name:, product_catalog_id:, status: 'ACTIVE')
+    def create_dynamic_ad_campaign(name: nil, product_catalog_id: nil, status: 'ACTIVE')
       raise Exception, "Status must be one of: #{AdCampaign::STATUSES.join(', ')}" unless AdCampaign::STATUSES.include?(status)
       query = { name: name, objective: 'PRODUCT_CATALOG_SALES', status: status, promoted_object: { product_catalog_id: product_catalog_id } }
       result = AdCampaign.post("/#{id}/campaigns", query: query)
@@ -96,7 +96,7 @@ module FacebookAds
       end.flatten
     end
 
-    def reach_estimate(targeting:, optimization_goal:, currency: 'USD')
+    def reach_estimate(targeting: nil, optimization_goal: nil, currency: 'USD')
       raise Exception, "Optimization goal must be one of: #{AdSet::OPTIMIZATION_GOALS.join(', ')}" unless AdSet::OPTIMIZATION_GOALS.include?(optimization_goal)
 
       if targeting.is_a?(AdTargeting)
@@ -123,7 +123,7 @@ module FacebookAds
 
     # hash_many ad_audiences
 
-    def create_ad_audience_with_pixel(name:, pixel_id:, event_name:, subtype: 'WEBSITE', retention_days: 15)
+    def create_ad_audience_with_pixel(name: nil, pixel_id: nil, event_name: nil, subtype: 'WEBSITE', retention_days: 15)
       query = {
         name: name,
         pixel_id: pixel_id,
