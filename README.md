@@ -30,11 +30,15 @@ FacebookAds.access_token = '[YOUR_ACCESS_TOKEN]'
 
 ## API Version
 
-This gem currently uses v2.8 of the Marketing API (soon to be updated to 2.9). You can change the version as desired with the following:
+This gem currently uses v2.9 of the Marketing API.
 
 ```ruby
 FacebookAds.base_uri = 'https://graph.facebook.com/v2.9'
 ```
+
+## Ruby Version
+
+REQUIRED RUBY VERSION: ~> 2.0
 
 ## Console
 
