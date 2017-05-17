@@ -150,6 +150,15 @@ campaign.destroy
 
 ___
 
+### [Ad Videos](https://developers.facebook.com/docs/marketing-api/advideo/v2.9) (Fetch)
+
+Fetch all advideos owned by an account:
+```ruby
+ad_videos = account.ad_videos
+```
+
+___
+
 ### [Ad Images](https://developers.facebook.com/docs/marketing-api/reference/ad-image) (Fetch, Find, Create, Destroy)
 
 Notes:

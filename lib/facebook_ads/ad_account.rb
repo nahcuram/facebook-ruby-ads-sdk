@@ -39,6 +39,12 @@ module FacebookAds
       AdCampaign.find(result['id'])
     end
 
+    # has_many ad_videos
+
+    def ad_videos(limit: 100)
+      AdVideo.paginate("/#{id}/advideos", query: { limit: limit })
+    end
+
     # has_many ad_images
 
     def ad_images(hashes: nil, limit: 100)
@@ -72,13 +78,13 @@ module FacebookAds
 
     # has_many ad_sets
 
-    def ad_sets(effective_status: ['ACTIVE'], limit: 100)
+    def ad_sets(effective_status: nil, limit: 100)
       AdSet.paginate("/#{id}/adsets", query: { effective_status: effective_status, limit: limit })
     end
 
     # has_many ads
 
-    def ads(effective_status: ['ACTIVE'], limit: 100)
+    def ads(effective_status: nil, limit: 100)
       Ad.paginate("/#{id}/ads", query: { effective_status: effective_status, limit: limit })
     end
 

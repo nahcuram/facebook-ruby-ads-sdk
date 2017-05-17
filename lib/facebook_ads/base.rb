@@ -6,9 +6,14 @@ module FacebookAds
         get("/#{id}", objectify: true)
       end
 
+      def base_uri(path)
+        path.include?('advideos') ? FacebookAds.base_video_uri : FacebookAds.base_uri
+      end
+
       def get(path, query: {}, objectify: nil)
         query = pack(query, objectify: objectify) # Adds access token, fields, etc.
-        uri = "#{FacebookAds.base_uri}#{path}?" + build_nested_query(query)
+        uri = "#{base_uri(path)}#{path}?" + build_nested_query(query)
+        p uri
         FacebookAds.logger.debug "GET #{uri}"
         response = begin
           RestClient.get(uri, accept: :json, accept_encoding: :identity)
@@ -20,7 +25,7 @@ module FacebookAds
 
       def post(path, query: {})
         query = pack(query, objectify: false)
-        uri = "#{FacebookAds.base_uri}#{path}"
+        uri = "#{base_uri(path)}#{path}"
         FacebookAds.logger.debug "POST #{uri} #{query}"
         response = begin
           RestClient.post(uri, query)
@@ -32,7 +37,7 @@ module FacebookAds
 
       def delete(path, query: {})
         query = pack(query, objectify: false)
-        uri = "#{FacebookAds.base_uri}#{path}?" + build_nested_query(query)
+        uri = "#{base_uri(path)}#{path}?" + build_nested_query(query)
         FacebookAds.logger.debug "DELETE #{uri}"
         response = begin
           RestClient.delete(uri)
@@ -91,7 +96,6 @@ module FacebookAds
       def unpack(response, objectify: nil)
         raise Exception, 'Invalid nil response' if response.nil?
         response = response.body if response.is_a?(RestClient::Response)
-
         if response.is_a?(String)
           response = begin
             JSON.parse(response)

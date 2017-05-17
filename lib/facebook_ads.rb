@@ -23,6 +23,15 @@ module FacebookAds
     @logger
   end
 
+  def self.base_video_uri=(base_video_uri)
+    @base_video_uri = base_video_uri
+  end
+
+  def self.base_video_uri
+    @base_video_uri = 'https://graph-video.facebook.com/v2.9' unless defined?(@base_video_uri)
+    @base_video_uri
+  end
+
   def self.base_uri=(base_uri)
     @base_uri = base_uri
   end
