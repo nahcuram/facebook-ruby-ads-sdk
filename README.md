@@ -384,17 +384,7 @@ account.ad_insights
 
 Fetch yesterday's insights for an account:
 ```ruby
-account.ad_insights(range: Date.yesterday..Date.yesterday)
-```
-
-Fetch today's insights for a campaign:
-```ruby
-account.ad_campaigns.last.ad_insights
-```
-
-Fetch yesterday's insights for a campaign:
-```ruby
-account.ad_campaigns.last.ad_insights(range: Date.yesterday..Date.yesterday)
+account.ad_insights(date_start: Date.yesterday, date_stop: Date.yesterday)
 ```
 
 ___
