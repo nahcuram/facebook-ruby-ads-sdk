@@ -377,11 +377,6 @@ ___
 
 ### [Ad Insights](https://developers.facebook.com/docs/marketing-api/insights/overview) (Fetch)
 
-Fetch today's insights for an account:
-```ruby
-account.ad_insights
-```
-
 Fetch yesterday's insights for an account:
 ```ruby
 account.ad_insights(date_start: Date.yesterday, date_stop: Date.yesterday)
