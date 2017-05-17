@@ -20,7 +20,7 @@ module FacebookAds
 
     # has_many campaigns
 
-    def ad_campaigns(effective_status: ['ACTIVE'], limit: 100)
+    def ad_campaigns(effective_status: nil, limit: 100)
       AdCampaign.paginate("/#{id}/campaigns", query: { effective_status: effective_status, limit: limit })
     end
 
@@ -90,9 +90,9 @@ module FacebookAds
 
     # has_many ad_insights
 
-    def ad_insights(range: Date.today..Date.today, level: 'ad', time_increment: 1)
+    def ad_insights(date_start: Date.yesterday, date_stop: Date.yesterday)
       ad_campaigns.map do |ad_campaign|
-        ad_campaign.ad_insights(range: range, level: level, time_increment: time_increment)
+        ad_campaign.ad_insights(date_start: date_start, date_stop: date_stop)
       end.flatten
     end
 

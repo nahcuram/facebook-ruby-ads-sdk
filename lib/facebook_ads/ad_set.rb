@@ -77,5 +77,14 @@ module FacebookAds
       result = Ad.post("/act_#{account_id}/ads", query: query)
       Ad.find(result['id'])
     end
+
+    def ad_insights(date_start: Date.yesterday, date_stop: Date.yesterday, level: 'ad')
+      query = {
+        time_range: { since: date_start.strftime('%Y-%m-%d'), until: date_stop.strftime('%Y-%m-%d') },
+        action_attribution_windows: ['1d_view', '28d_click'],
+        level: level
+      }
+      AdInsight.paginate("/#{id}/insights", query: query)
+    end
   end
 end

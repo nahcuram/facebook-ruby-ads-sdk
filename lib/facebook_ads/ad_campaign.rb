@@ -88,11 +88,11 @@ module FacebookAds
 
     # has_many ad_insights
 
-    def ad_insights(range: Date.today..Date.today, level: 'ad', time_increment: 1)
+    def ad_insights(date_start: Date.yesterday, date_stop: Date.yesterday, level: 'ad')
       query = {
-        level: level,
-        time_increment: time_increment,
-        time_range: { since: range.first.to_s, until: range.last.to_s }
+        time_range: { since: date_start.strftime('%Y-%m-%d'), until: date_stop.strftime('%Y-%m-%d') },
+        action_attribution_windows: ['1d_view', '28d_click'],
+        level: level
       }
       AdInsight.paginate("/#{id}/insights", query: query)
     end
