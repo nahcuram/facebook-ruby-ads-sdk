@@ -13,7 +13,6 @@ module FacebookAds
       def get(path, query: {}, objectify: nil)
         query = pack(query, objectify: objectify) # Adds access token, fields, etc.
         uri = "#{base_uri(path)}#{path}?" + build_nested_query(query)
-        p uri
         FacebookAds.logger.debug "GET #{uri}"
         response = begin
           RestClient.get(uri, accept: :json, accept_encoding: :identity)
