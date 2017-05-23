@@ -100,6 +100,25 @@ account.update(name: 'ReFuel4') # Returns a boolean.
 
 The list of fields that can be updated is [here](https://developers.facebook.com/docs/marketing-api/reference/ad-account#Updating).
 
+
+___
+
+### [Custom Conversions](https://developers.facebook.com/docs/marketing-api/reference/custom-conversion/) (Fetch)
+
+Fetch all custom conversions owned by an account:
+```ruby
+custom_conversions = account.custom_conversions
+```
+
+___
+
+### [Post](https://developers.facebook.com/docs/graph-api/reference/v2.9/post) (Fetch)
+
+Fetch post
+```ruby
+FacebookAds::Post.find_by_object_story_id("#{object_story_id}")
+```
+
 ___
 
 ### [Ad Campaigns](https://developers.facebook.com/docs/marketing-api/reference/ad-campaign-group) (Fetch, Find, Create, Update, Destroy)

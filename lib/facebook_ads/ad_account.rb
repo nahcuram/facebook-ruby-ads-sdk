@@ -94,6 +94,12 @@ module FacebookAds
       AdAudience.paginate("/#{id}/customaudiences")
     end
 
+    # has_many custom_conversions
+
+    def custom_conversions
+      CustomConversion.paginate("/#{id}/customconversions")
+    end
+
     # has_many ad_insights
 
     def ad_insights(date_start: Date.yesterday, date_stop: Date.yesterday)
