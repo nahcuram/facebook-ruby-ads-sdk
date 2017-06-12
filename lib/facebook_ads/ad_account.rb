@@ -102,9 +102,9 @@ module FacebookAds
 
     # has_many ad_insights
 
-    def ad_insights(date_start: Date.yesterday, date_stop: Date.yesterday)
+    def ad_insights(date_start: Date.yesterday, date_stop: Date.yesterday, level: 'ad')
       ad_campaigns.map do |ad_campaign|
-        ad_campaign.ad_insights(date_start: date_start, date_stop: date_stop)
+        ad_campaign.ad_insights(date_start: date_start, date_stop: date_stop, level: level)
       end.flatten
     end
 
